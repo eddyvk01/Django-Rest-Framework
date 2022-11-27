@@ -16,14 +16,14 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def student_api(request):
     if request.method == 'GET':
-        json_data = request.body
-        stream = io.BytesIO(json_data)
-        pythondata = JSONParser().parse(stream)
-        id = pythondata.get('id', None)
+        json_data = request.body  # data sending by clent(myapp.py file) to api 
+        stream = io.BytesIO(json_data)  #kepting data as bytes in an in-memory buffer
+        pythondata = JSONParser().parse(stream) #convert into python dictionary
+        id = pythondata.get('id', None) #checking id is none or not
         if id is not None:
-          stu = Student.objects.get(id=id)
-          serializer = StudentSerializer(stu)
-          json_data = JSONRenderer().render(serializer.data)
+          stu = Student.objects.get(id=id)  #getting required data by using SQL query 
+          serializer = StudentSerializer(stu)   #converting into python native datatype
+          json_data = JSONRenderer().render(serializer.data)  #render into Json 
           return HttpResponse(json_data,content_type= 'application/json')
         
         stu = Student.objects.all()
