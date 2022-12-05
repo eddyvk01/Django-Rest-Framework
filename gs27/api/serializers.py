@@ -9,9 +9,9 @@ class SongSerializer(serializers.ModelSerializer):
 class SingerSerializer(serializers.ModelSerializer):
     # song = serializers.StringRelatedField(many=True,read_only=True) #it put song detail form song models 
     # song = serializers.PrimaryKeyRelatedField(many=True,read_only=True)
-    song = serializers.HyperlinkedRelatedField(many=True,read_only=True,view_name='song-detail')  #It create link of the songs
-    song = serializers.SlugRelatedField(many=True,read_only=True,slug_field='duration')  #It create link of the songs
-    song = serializers.HyperlinkedIdentityField(view_name='song-detail')  #It create link of the songs
+    # song = serializers.HyperlinkedRelatedField(many=True,read_only=True,view_name='song-detail')  #It create link of the songs
+    # song = serializers.SlugRelatedField(many=True,read_only=True,slug_field='duration')  #It create link of the songs
+    song = serializers.HyperlinkedIdentityField(view_name='song-detail')  #It create link of the songs usually it udes with HyperLinkedModelViewSerializer
 
     class Meta:
         model = Singer
